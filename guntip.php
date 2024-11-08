@@ -1,5 +1,34 @@
 <?php
 session_start();
+// Połączenie z bazą danych
+$servername = "localhost";  // Zmień, jeśli Twój serwer jest inny
+$username = "root";         // Nazwa użytkownika bazy danych
+$password = "";             // Hasło użytkownika bazy danych
+$dbname = "gameassistandb";      // Nazwa bazy danych
+
+// Połączenie z bazą danych
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Sprawdzenie połączenia
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Zapytanie SQL do pobrania jednej losowej porady
+$sql = "SELECT TIPID, DESCRIPTION FROM tips ORDER BY RAND() LIMIT 1";
+$result = $conn->query($sql);
+
+// Sprawdzenie, czy wynik istnieje
+if ($result->num_rows > 0) {
+    // Pobieranie jednej porady
+    $row = $result->fetch_assoc();
+    $tipDescription = $row['DESCRIPTION'];
+} else {
+    $tipDescription = "Brak porad w bazie danych.";
+}
+
+// Zamknięcie połączenia z bazą danych
+$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -7,11 +36,17 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> SkillShot Academy </title>
+    <title>Porada z Valorant</title>
+    <link rel="stylesheet" type="text/css" href="tipsbox.css">
     <link rel="stylesheet" type="text/css" href="gamelikecss.css">
     <link rel="stylesheet" type="text/css" href="profilelist.css">
-    <link rel="shortcut icon" href="radiant-rank.png">
     <script src="profilelist.js"></script>
+    <script>
+        // Przekierowanie na index.php po 7 sekundach
+        setTimeout(function() {
+            window.location.href = 'gunsindex.php'; // Zmień na swoją stronę docelową
+        }, 7000); // 7000 ms = 7 sekund
+    </script>
 </head>
 <body>
 
@@ -87,39 +122,33 @@ session_start();
     </div>
 </div>
 
-<?php
-    if (!isset($_SESSION['username'])) {
-        header("Location: index.php");
-        exit();
-    }
-?>
-<div class="dashboardmaindiv">
-    <div class="floating-island">
-        <div class="link-grid">
-            <a href="agentstip.php" class="link-box"><img src="ICONS\agents-icon.png" alt="agents-logo" width="230px" heigth="230px"></a><br><br><br><br>
-            <a href="techtip.php" class="link-box"><img src="ICONS\valorant-tech.png" alt="valorant-tech" width="200px" heigth="200px"></a><br><br><br><br>
-            <a href="guntip.php" class="link-box"><img src="ICONS\gun-icon.png" alt="gun-logo" width="350px" heigth="100px"></a><br><br><br><br>
-        </div>
-        <div class="link-grid">
-            <a href="crosshairtip.php" class="link-box"><img src="ICONS\crosshair-icon.png" alt="crosshair-logo" width="250px" heigth="250px"></a><br><br><br><br>
-            <a href="phrasebooktip.php" class="link-box"><img src="ICONS\phrase-book-icon.png" alt="phrase-book-logo"></a><br><br><br><br>
-            <a href="questionmarktip.php" class="link-box"><img src="ICONS\question-mark-icon.png" width="230px" heigth="230px" alt="agents-logo"></a><br><br><br><br>
-        </div>
-    </div>
-</div>
-<div class="dashboardfooterdiv">
-    <div class="dashboardfooterdivleft">
-        <h2> 
-        <b><i> I N F O: </b></i><br>
-        </h2>
-    </div>
-    <div class="dashboardfooterdivright">
-        <a class="linkbut" href="faqindex.html"><img alt="faq-link" src="faq-logo.png" style="width: 60px; height: 50px;"></a><br><br>
-        <a class="linkbut" href="https://discord.gg/JjmAzzcxsh"><img alt="discord-server-link" src="discord-logo.png" style="width: 50px; height: 30px;"></a><br><br>
-        <a class="linkbut" href="https://www.riotgames.com/pl"><img alt="riot-games-link" src="riot-logo.png" style="width: 50px; height: 50px;"></a><br><br>
-        <a class="linkbut" href="https://playvalorant.com/pl-pl/?utm_medium=card2%2Bwww.riotgames.com&utm_source=riotbar"><img alt="valorant-link" src="valorant-logo.png" style="width: 70px; height: 40px;"></a><br><br>
-    </div>
-</div>
+<div class="tipsmaindiv">
+
+<div class="tip-box">
+    <h2>Porada na dzisiaj</h2>
+    <p><?php echo $tipDescription; ?></p>
+
+    <div id="tip">Pozostało 5 sekund...</div>
+
+<script>
+    let seconds = 5; // Startujemy od 5 sekund
+
+    // Funkcja, która będzie odliczać i aktualizować tekst
+    const countdown = setInterval(function() {
+        // Zaktualizuj tekst w divie
+        document.getElementById('tip').innerText = `Pozostało ${seconds} sekund...`;
+
+        // Jeśli czas dobiegnie końca
+        if (seconds === 0) {
+            clearInterval(countdown); // Zatrzymaj odliczanie
+        } else {
+            // Zmniejsz czas o 1 sekundę
+            seconds--;
+        }
+    }, 1000); // Odliczanie co 1 sekundę (1000 ms)
+
+</script>
+</div></div>
 
 </body>
 </html>

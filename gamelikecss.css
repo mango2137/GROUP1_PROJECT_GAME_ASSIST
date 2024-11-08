@@ -32,25 +32,56 @@ body {
     flex-direction: row;
 }
 
+
 .dashboardmaindiv {
     background: transparent;
     box-shadow: 0 0 5px #58b8f1, 0 0 10px #58b8f1, 0 0 15px #58b8f1;
-    padding: 10px;
     align-items: center;
     justify-content: center;
     width: 100%;
     height: 82%;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+}
+
+.tipsmaindiv {
+    background: transparent;
+    box-shadow: 0 0 5px #58b8f1, 0 0 10px #58b8f1, 0 0 15px #58b8f1;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
 }
 
 .dashboardleftheaderdiv {
-    width: 80%;
-    height: 100%;
+    width: 100%;
+    height: 10%;
     display: flex;
     flex-direction: row;
     align-items: center;
+}
+
+.settingstopheaderdiv {
+    align-self: top;
+    width: 100%;
+    height: 20%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.settingsheaderdiv {
+    align-self: top;
+    background: #1a1a1a;
+    box-shadow: 0 0 5px #58b8f1, 0 0 10px #58b8f1, 0 0 15px #58b8f1;
+    align-items: center;
+    width: 80%;
+    height: 90%;
+    border-radius: 25px;
+    display: flex;
+    flex-direction: column;
 }
 
 .dashboardrightheaderdiv {
@@ -98,17 +129,18 @@ body {
 }
 
 .floating-island {
+    
     border-radius: 20px;
     box-shadow: 0 0 5px #58b8f1, 0 0 10px #58b8f1, 0 0 15px #58b8f1;
     background: #1a1a1a;
-    padding: 10px;
     align-items: center;
     justify-content: center;
     width: 60%;
-    height: 85%;
+    height: 90%;
     display: flex;
     flex-direction: column;
     gap: 20px;
+    padding: 20px;
 }
 /* Podstawowe elementy strony REGISTER i LOGIN */
 .maindiv {
@@ -218,6 +250,25 @@ input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focu
     outline: none;
 }
 
+.submit {
+    padding: 10px;
+    background: #58b8f1;
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+.submit:hover {
+    background: #47a4d4;
+    transform: scale(1.05);
+}
+.submit:active {
+    background: #3897c7;
+    transform: scale(1);
+}
+
 button {
     padding: 15px;
     background: #58b8f1;
@@ -314,6 +365,7 @@ input[type="text"]:hover, input[type="password"]:hover, input[type="email"]:hove
     -moz-animation: link 1s ease-in-out infinite alternate;
     animation: link 1s ease-in-out infinite alternate;
   }
+
   @-webkit-keyframes link {
     from {
       text-shadow: 0 0 10px #ff0000, 0 0 20px #fd00c6, 0 0 30px #b700ff, 0 0 40px #4c00ff, 0 0 50px #0026ff;
@@ -331,6 +383,7 @@ input[type="text"]:hover, input[type="password"]:hover, input[type="email"]:hove
     -moz-animation: glow 1s ease-in-out infinite alternate;
     animation: glow 1s ease-in-out infinite alternate;
   }
+
   @-webkit-keyframes glow {
     from {
       text-shadow: 0 0 10px #0077ff, 0 0 20px #0077ff, 0 0 30px #0077ff, 0 0 40px #0077ff, 0 0 50px #0077ff, 0 0 60px #0077ff, 0 0 70px #0077ff;
@@ -348,6 +401,7 @@ input[type="text"]:hover, input[type="password"]:hover, input[type="email"]:hove
     -moz-animation: glow2 1s ease-in-out infinite alternate;
     animation: glow2 1s ease-in-out infinite alternate;
   }
+  
   @-webkit-keyframes glow2 {
     from {
       text-shadow: 0 0 10px #0077ff, 0 0 20px #0077ff, 0 0 30px #0077ff, 0 0 40px #0077ff, 0 0 50px #0077ff, 0 0 60px #0077ff, 0 0 70px #0077ff;
@@ -374,13 +428,12 @@ input[type="text"]:hover, input[type="password"]:hover, input[type="email"]:hove
 .link-grid {
     display: flex;
     flex-direction: row;
-    gap: 10px;                 /* Odstęp między elementami */
     margin: 0 auto;            /* Centrowanie kontenera na stronie */
-    padding: 5px;             /* Padding wokół kontenera */
 }
 
 /* Stylowanie dla każdego linku */
 .link-box {
+    margin: 10px;
     display: flex;                     /* Flexbox dla centrowania tekstu */
     justify-content: center;            /* Wyrównanie poziome */
     align-items: center;                /* Wyrównanie pionowe */

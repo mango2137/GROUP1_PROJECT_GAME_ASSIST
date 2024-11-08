@@ -1,7 +1,7 @@
 <?php
 // config.php
 $host = 'localhost';
-$dbname = 'gadb_test';
+$dbname = 'gameassistandb';
 $username = 'root';  // Ustaw zgodnie z danymi do bazy
 $password = '';      // Ustaw hasło do bazy (jeśli masz)
 
